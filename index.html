@@ -472,13 +472,13 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
             </div>
           </div>
           <div class="field" style="grid-column:1/-1">
-            <label>Seguro Médico <span class="req">*</span> <span class="opt">— si no tiene, escribir "Particular"</span></label>
+            <label>Seguro Médico <span class="req">*</span></label>
             <div class="input-wrap">
               <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-              <input type="text" id="seguro" placeholder="Ej: IPS, AMED, Particular..." required>
+              <input type="text" id="seguro" placeholder="Ej: Particular, OAMI, SPS..." required>
             </div>
-
           </div>
+
         </div>
       </div>
 
@@ -513,13 +513,7 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
             <input type="email" id="email" placeholder="correo@ejemplo.com">
           </div>
         </div>
-        <div class="field" style="margin-bottom:0">
-          <label>Seguro Médico <span class="opt">— opcional</span></label>
-          <div class="input-wrap">
-            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-            <input type="text" id="insurance" placeholder="Ej: IPS, Aseguradora Tajy, privado... (si no tiene, dejá en blanco)">
-          </div>
-        </div>
+
       </div>
 
       <hr class="section-divider">
@@ -623,8 +617,8 @@ document.getElementById('budgetForm').addEventListener('submit', async function(
   const payload = {
     id: reqId, fecha: timestamp,
     paciente: patientName, edad: patientAge + ' años',
-    seguro: seguro,
     responsable: parentName,
+    seguro: seguro,
     whatsapp, email: email || '—',
     procedimiento: procedure || '—',
     estado: 'Pendiente'
@@ -658,12 +652,7 @@ document.getElementById('budgetForm').addEventListener('submit', async function(
 
 });
 
-function setSeguro(val) {
-  document.getElementById('seguro').value = val;
-  document.querySelectorAll('.quick-tag').forEach(b => {
-    b.classList.toggle('active', b.textContent === val);
-  });
-}
+
 
 function resetForm() {
   document.getElementById('budgetForm').reset();
