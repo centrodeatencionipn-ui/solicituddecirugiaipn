@@ -572,10 +572,21 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
         Estado: Pendiente
       </div>
 
+      <!-- Instrucción WhatsApp -->
+      <div style="background:var(--ipn-blue-pale);border:1px solid rgba(21,101,192,0.18);border-radius:12px;padding:18px 20px;margin-bottom:16px;text-align:left;">
+        <p style="font-size:14px;font-weight:700;color:var(--ipn-blue);margin-bottom:8px;">📋 Último paso para recibir su presupuesto:</p>
+        <p style="font-size:13.5px;color:var(--gray-700);line-height:1.75;margin-bottom:10px;">
+          Presione el botón verde y se abrirá WhatsApp con su solicitud ya redactada.
+          <strong>Antes de enviar, adjunte la imagen o foto de su orden de cirugía</strong> tocando el ícono 📎 en WhatsApp.
+        </p>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.7;">
+          Con esa información nuestro equipo podrá preparar su presupuesto personalizado a la brevedad. ¡Muchas gracias! 🙏
+        </p>
+      </div>
+
       <div id="waSuccessArea"></div>
 
-
-      <p style="font-size:12px;color:var(--gray-400);margin-top:18px;margin-bottom:18px">Conserve el número de referencia para futuras consultas.</p>
+      <p style="font-size:12px;color:var(--gray-400);margin-top:14px;margin-bottom:18px">Conserve el número de referencia para futuras consultas.</p>
       <button class="btn-ghost" onclick="resetForm()">Nueva solicitud</button>
     </div>
   </div>
@@ -587,7 +598,7 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
 
 <script>
 const CONFIG = {
-  SHEETS_URL: 'https://script.google.com/macros/s/AKfycbwqnROTFRszWrIM6IlNuahHkToRSz5WQ7ucAjsBEENSQTRgdlAjRfUbq6L-EqSZRZ_7GA/exec',
+  SHEETS_URL: 'https://script.google.com/macros/s/AKfycbzH8XeIiiZkVrwtW8AHVgOjsDINVhI4M5erCjROWldsl39eYaWCfMwq8M_4rh-ITiEwOA/exec',
   WA_NUMBER: '595986860515'
 };
 
