@@ -635,16 +635,32 @@ document.getElementById('budgetForm').addEventListener('submit', async function(
     estado: 'Pendiente'
   };
 
+  // Envío a Google Sheets via iframe (método más confiable con Apps Script)
   try {
-    const params = new URLSearchParams();
-    params.append('data', JSON.stringify(payload));
-    await fetch(CONFIG.SHEETS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString()
-    });
-  } catch(err) { console.warn('Sheets:', err); }
+    const iframe = document.createElement('iframe');
+    iframe.name = 'hidden_iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = CONFIG.SHEETS_URL;
+    form.target = 'hidden_iframe';
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'data';
+    input.value = JSON.stringify(payload);
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+
+    setTimeout(() => {
+      document.body.removeChild(form);
+      document.body.removeChild(iframe);
+    }, 3000);
+  } catch(err) { console.warn('Sheets error:', err); }
 
   btn.disabled = false;
   document.getElementById('btnText').textContent = 'Enviar Solicitud';
