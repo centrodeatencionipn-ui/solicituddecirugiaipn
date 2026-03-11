@@ -311,6 +311,24 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
 }
 .btn-wa:hover { opacity: 0.9; transform: translateY(-1px); }
 
+.quick-tag {
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.quick-tag:hover, .quick-tag.active {
+  border-color: var(--ipn-blue);
+  background: var(--ipn-blue-light);
+  color: var(--ipn-blue);
+}
+
 .btn-ghost {
   background: none; border: 1.5px solid var(--gray-200); border-radius: 8px;
   padding: 10px 24px; font-family: 'Lato', sans-serif; font-size: 14px;
@@ -440,11 +458,26 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
             </div>
           </div>
           <div class="field">
+            <label>Edad del Paciente <span class="req">*</span></label>
+            <div class="input-wrap">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <input type="number" id="patientAge" placeholder="Ej: 8" min="0" max="120" required>
+            </div>
+          </div>
+          <div class="field" style="grid-column:1/-1">
             <label>Padre / Madre / Tutor <span class="req">*</span></label>
             <div class="input-wrap">
               <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               <input type="text" id="parentName" placeholder="Nombre completo" required>
             </div>
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <label>Seguro Médico <span class="req">*</span> <span class="opt">— si no tiene, escribir "Particular"</span></label>
+            <div class="input-wrap">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              <input type="text" id="seguro" placeholder="Ej: IPS, AMED, Particular..." required>
+            </div>
+
           </div>
         </div>
       </div>
@@ -461,16 +494,30 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
       <div class="section-body">
         <div class="field">
           <label>WhatsApp <span class="req">*</span> <span class="opt">— para envío del presupuesto</span></label>
-          <div class="input-wrap">
-            <svg class="input-icon" viewBox="0 0 24 24" fill="currentColor" style="opacity:.55"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-            <input type="tel" id="whatsapp" placeholder="+595 9XX XXX XXX" required>
+          <div style="display:flex;gap:8px;align-items:stretch;">
+            <div style="position:relative;flex-shrink:0;width:100px;">
+              <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--ipn-blue-mid);opacity:0.7;pointer-events:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <input type="text" id="waCountry" value="+595" style="padding-left:32px;text-align:left;font-weight:700;color:var(--ipn-blue);width:100%;">
+            </div>
+            <div class="input-wrap" style="flex:1;">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="currentColor" style="opacity:.55"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              <input type="tel" id="whatsapp" placeholder="986 860 515" required>
+            </div>
           </div>
+          <div style="font-size:11.5px;color:var(--gray-600);margin-top:5px;">📌 Si es de Paraguay dejá <strong>+595</strong>. Si es de otro país, cambiá el código.</div>
         </div>
-        <div class="field" style="margin-bottom:0">
+        <div class="field">
           <label>Correo Electrónico <span class="opt">— opcional</span></label>
           <div class="input-wrap">
             <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             <input type="email" id="email" placeholder="correo@ejemplo.com">
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Seguro Médico <span class="opt">— opcional</span></label>
+          <div class="input-wrap">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            <input type="text" id="insurance" placeholder="Ej: IPS, Aseguradora Tajy, privado... (si no tiene, dejá en blanco)">
           </div>
         </div>
       </div>
@@ -486,63 +533,24 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
       </div>
       <div class="section-body">
         <div class="field" style="margin-bottom:0">
-          <label>Cirugía / Procedimiento <span class="req">*</span></label>
+          <label>¿Qué cirugía necesita? <span class="opt">— opcional</span></label>
           <div class="input-wrap">
             <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="top:14px;transform:none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            <textarea id="procedure" placeholder="Describa brevemente la cirugía o procedimiento solicitado..." required></textarea>
+            <textarea id="procedure" placeholder="Opcional — describa brevemente si lo sabe"></textarea>
+          </div>
+          <div style="background:var(--ipn-blue-pale);border:1px solid rgba(21,101,192,0.15);border-radius:8px;padding:10px 14px;margin-top:8px;">
+            <p style="font-size:12.5px;color:var(--ipn-blue);font-weight:700;margin-bottom:6px;">✏️ ¿Qué escribir acá?</p>
+            <p style="font-size:12px;color:var(--gray-600);line-height:1.7;">Escriba el nombre de la cirugía o lo que el médico le indicó. Ejemplos:</p>
+            <ul style="font-size:12px;color:var(--gray-600);line-height:1.9;padding-left:18px;margin-top:4px;">
+              <li>Extirpación de amígdalas</li>
+              <li>Cirugía de hernia inguinal</li>
+              <li>Operación de apéndice</li>
+              <li>No sé el nombre exacto, el médico me dio una orden</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <hr class="section-divider">
-
-      <!-- Orden médica -->
-      <div class="section-head">
-        <div class="section-head-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
-        </div>
-        <div class="section-head-title">Orden Médica</div>
-      </div>
-      <div class="section-body">
-        <div class="field">
-          <label>Adjuntar Imagen de la Orden <span class="opt">— opcional</span></label>
-          <div class="upload-zone" id="uploadZone">
-            <input type="file" id="orderImage" accept="image/*,.pdf" onchange="handleFileSelect(event)">
-            <span class="upload-icon-big">🗂️</span>
-            <div class="upload-text">Haga clic o arrastre el archivo aquí</div>
-            <div class="upload-hint">JPG, PNG o PDF · Máximo 10 MB</div>
-          </div>
-          <div class="file-preview" id="filePreview">
-            <span>📎</span>
-            <span class="file-preview-name" id="fileName"></span>
-            <button type="button" class="file-remove" onclick="removeFile()">✕</button>
-          </div>
-        </div>
-
-        <div class="field" style="margin-bottom:0">
-          <label>Preferencia de recepción</label>
-          <div class="pill-group">
-            <div class="pill-option">
-              <input type="radio" name="preference" id="prefWA" value="whatsapp" checked>
-              <label for="prefWA">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-                WhatsApp
-              </label>
-            </div>
-            <div class="pill-option">
-              <input type="radio" name="preference" id="prefEmail" value="email">
-              <label for="prefEmail">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Email
-              </label>
-            </div>
-            <div class="pill-option">
-              <input type="radio" name="preference" id="prefBoth" value="ambos">
-              <label for="prefBoth">Ambos</label>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Action -->
       <div class="action-area">
@@ -572,18 +580,6 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
 
       <div id="waSuccessArea"></div>
 
-      <div id="orderSteps" style="display:none; text-align:left; margin-top:18px; background:var(--ipn-blue-pale); border:1px solid rgba(21,101,192,0.15); border-radius:10px; padding:16px 20px;">
-        <p style="font-size:13px;font-weight:700;color:var(--ipn-blue);margin-bottom:10px;display:flex;align-items:center;gap:6px;">
-          <span>📎</span> Para enviar la imagen de la orden:
-        </p>
-        <ol style="font-size:13px;color:var(--gray-700);line-height:2;padding-left:20px;">
-          <li>Presione el botón verde <strong>"Enviar por WhatsApp"</strong></li>
-          <li>WhatsApp se abrirá con el mensaje ya escrito y listo</li>
-          <li>Antes de enviar, toque el ícono de <strong>clip 📎</strong></li>
-          <li>Seleccione la <strong>imagen de la orden médica</strong> de su galería</li>
-          <li>Envíe el mensaje junto con la imagen adjunta</li>
-        </ol>
-      </div>
 
       <p style="font-size:12px;color:var(--gray-400);margin-top:18px;margin-bottom:18px">Conserve el número de referencia para futuras consultas.</p>
       <button class="btn-ghost" onclick="resetForm()">Nueva solicitud</button>
@@ -597,46 +593,22 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.6; padding-top: 11
 
 <script>
 const CONFIG = {
-  SHEETS_URL: 'https://script.google.com/macros/s/AKfycbxj61wYI5Bc-Qu77s3LC0RC6L_xbE3HynSNhuQ7kmkZxmbjUWocFcb1Nz9l4VeTztoS6A/exec',
+  SHEETS_URL: 'https://script.google.com/macros/s/AKfycbx361QoAtHu_PBLio7qP1DGETny3bRd8TWHxebOBJOaoCeoy1L_hKb290fagpezYEfyzA/exec',
   WA_NUMBER: '595986860515'
 };
 
-let selectedFile = null;
-
-function handleFileSelect(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (file.size > 10 * 1024 * 1024) { showToast('El archivo supera los 10 MB permitidos', 'error'); return; }
-  selectedFile = file;
-  document.getElementById('fileName').textContent = file.name;
-  document.getElementById('filePreview').classList.add('visible');
-}
-
-function removeFile() {
-  selectedFile = null;
-  document.getElementById('orderImage').value = '';
-  document.getElementById('filePreview').classList.remove('visible');
-}
-
-const zone = document.getElementById('uploadZone');
-zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
-zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
-zone.addEventListener('drop', e => {
-  e.preventDefault(); zone.classList.remove('dragover');
-  const file = e.dataTransfer.files[0];
-  if (file) { selectedFile = file; document.getElementById('fileName').textContent = file.name; document.getElementById('filePreview').classList.add('visible'); }
-});
 
 document.getElementById('budgetForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const patientName = document.getElementById('patientName').value.trim();
+  const patientAge  = document.getElementById('patientAge').value.trim();
   const parentName  = document.getElementById('parentName').value.trim();
+  const seguro      = document.getElementById('seguro').value.trim();
   const whatsapp    = document.getElementById('whatsapp').value.trim();
   const email       = document.getElementById('email').value.trim();
   const procedure   = document.getElementById('procedure').value.trim();
-  const preference  = document.querySelector('input[name="preference"]:checked').value;
 
-  if (!patientName || !parentName || !whatsapp || !procedure) {
+  if (!patientName || !patientAge || !parentName || !seguro || !whatsapp) {
     showToast('Por favor complete todos los campos obligatorios (*)', 'error'); return;
   }
 
@@ -650,11 +622,12 @@ document.getElementById('budgetForm').addEventListener('submit', async function(
 
   const payload = {
     id: reqId, fecha: timestamp,
-    paciente: patientName, responsable: parentName,
+    paciente: patientName, edad: patientAge + ' años',
+    seguro: seguro,
+    responsable: parentName,
     whatsapp, email: email || '—',
-    procedimiento: procedure, preferencia: preference,
-    estado: 'Pendiente',
-    tieneOrden: selectedFile ? 'Sí – ' + selectedFile.name : 'No'
+    procedimiento: procedure || '—',
+    estado: 'Pendiente'
   };
 
   try {
@@ -673,7 +646,7 @@ document.getElementById('budgetForm').addEventListener('submit', async function(
   document.getElementById('successState').classList.add('visible');
 
   // WA link
-  const msg = `🏥 *IPN – Instituto Privado del Niño y Adolescente\nSOLICITUD DE PRESUPUESTO QUIRÚRGICO*\n\n🆔 Ref: #${reqId}\n📅 Fecha: ${timestamp}\n\n👤 *Paciente:* ${patientName}\n👨‍👩‍👦 *Responsable:* ${parentName}\n📱 *WhatsApp:* ${whatsapp}\n📧 *Email:* ${email||'—'}\n\n🩺 *Procedimiento:* ${procedure}\n📄 *Orden:* ${payload.tieneOrden}\n📬 *Enviar por:* ${preference}\n\n_Estado: PENDIENTE_`;
+  const msg = `🏥 *IPN – Instituto Privado del Niño y Adolescente*\n*SOLICITUD DE PRESUPUESTO QUIRÚRGICO*\n\n🆔 Ref: #${reqId}\n📅 Fecha: ${timestamp}\n\n👤 *Paciente:* ${patientName}\n🎂 *Edad:* ${patientAge} años\n🛡️ *Seguro Médico:* ${seguro}\n👨‍👩‍👦 *Responsable:* ${parentName}\n📱 *WhatsApp:* ${whatsapp}\n📧 *Email:* ${email||'—'}\n\n🩺 *Procedimiento:* ${procedure||'No especificado'}\n\n_Estado: PENDIENTE_`;
   const waLink = `https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 
   const WA_SVG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>`;
@@ -683,11 +656,14 @@ document.getElementById('budgetForm').addEventListener('submit', async function(
   waBtn.innerHTML = WA_SVG + ' Enviar solicitud por WhatsApp al Consultorio';
   document.getElementById('waSuccessArea').appendChild(waBtn);
 
-  // Show steps if a file was selected
-  if (selectedFile) {
-    document.getElementById('orderSteps').style.display = 'block';
-  }
 });
+
+function setSeguro(val) {
+  document.getElementById('seguro').value = val;
+  document.querySelectorAll('.quick-tag').forEach(b => {
+    b.classList.toggle('active', b.textContent === val);
+  });
+}
 
 function resetForm() {
   document.getElementById('budgetForm').reset();
